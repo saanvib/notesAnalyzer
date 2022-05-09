@@ -1,14 +1,15 @@
 const button1 = document.getElementById('button1');
-const player = document.getElementById('player');
+
 const playerDiv = document.getElementById('player-div');
 const analyzeButton = document.getElementById('analyze');
 const analyzeDiv = document.getElementById('analyze-div');
 const analyzeSuccessDiv = document.getElementById('analyze-success');
-const iconDiv = document.getElementById('record_control');
+// const iconDiv = document.getElementById('record_control');
 const buttonText = document.getElementById('button-text');
 const downloadLink = document.getElementById('download-link');
-const analyzeIcon = document.getElementById('analyze-icon');
-
+const analyzeContainer = document.getElementById('analyze-container');
+// const helpButton = document.getElementById('helpbutton');
+var audio;
 var fileurl;
 var file;
 const handleSuccess = function(stream) {
@@ -23,21 +24,39 @@ const handleSuccess = function(stream) {
   mediaRecorder.addEventListener('stop', function() {
     file = new Blob(recordedChunks);
     fileurl = URL.createObjectURL(file);
-    player.src = fileurl;
+
+    audio = new Audio(
+      fileurl
+    );
+    initialize_audio_player();
+    
+    audio.addEventListener(
+      "loadeddata",
+      () => {
+        audioPlayer.querySelector(".time .length").textContent = getTimeCodeFromNum(
+          audio.duration
+        );
+        audio.volume = .75;
+      },
+      false
+    );
+
+
+    //player.src = fileurl;
     //var a = document.createElement('a');
     downloadLink.href = fileurl;
     downloadLink.download = "wavefile.wav"
-   downloadLink.style = "display: inline-block";
+   downloadLink.style = "display: inline";
   });
 
   function stopRecording() {
     mediaRecorder.stop();
-    iconDiv.classList.remove("fa-circle-stop");
-    iconDiv.classList.add("fa-microphone");
+    // iconDiv.classList.remove("fa-circle-stop");
+    // iconDiv.classList.add("fa-microphone");
     playerDiv.style = "display: inline-block";
-    buttonText.innerHTML = "Start Recording";
-    
-    analyzeDiv.style = "display: inline-block";
+    // buttonText.innerHTML = "Start Recording";
+    button1.style.backgroundImage = "url('assets/start_button.svg')";
+    analyzeContainer.style = "display:block";
     button1.removeEventListener('click', stopRecording);
     button1.addEventListener('click', startRecording);
     
@@ -48,13 +67,15 @@ const handleSuccess = function(stream) {
 
     recordedChunks = [];
     mediaRecorder.start();
-    iconDiv.classList.remove("fas", "fa-microphone");
-    iconDiv.classList.add("fas", "fa-circle-stop");
-    buttonText.innerHTML = "Stop Recording";
+    // iconDiv.classList.remove("fas", "fa-microphone");
+    // iconDiv.classList.add("fas", "fa-circle-stop");
+    // buttonText.innerHTML = "Stop Recording";
+    button1.style.backgroundImage = "url('assets/stop_button.svg')";
+
     button1.removeEventListener('click', startRecording);
     button1.addEventListener('click', stopRecording);
     playerDiv.style = "display: none";
-    analyzeDiv.style = "display: none";
+    analyzeContainer.style = "display: none";
     analyzeSuccessDiv.innerHTML = "";
     downloadLink.style = "display: none";
     
@@ -74,9 +95,9 @@ const handleSuccess = function(stream) {
 
   function analyzeFile(filename) {
     // 
-    analyzeIcon.classList.remove("fa-sliders");
-    analyzeIcon.classList.add("fa-spinner", "fa-pulse");
-    var functionUrl = "https://us-central1-notes-analyzer.cloudfunctions.net/analyze_file?filename=" + filename;
+    // analyzeIcon.classList.remove("fa-sliders");
+    // analyzeIcon.classList.add("fa-spinner", "fa-pulse");
+    var functionUrl = "/cors-proxy/us-central1-notes-analyzer.cloudfunctions.net/analyze_file?filename=" + filename;
     var xhr = new XMLHttpRequest();
     xhr.open("GET", functionUrl);     
       
@@ -92,19 +113,19 @@ const handleSuccess = function(stream) {
       drawPartNames: false
       });
       openSheetMusicDisplay
-      .load("https://storage.googleapis.com/notes-analyzer-music-files/" + xhr.responseText)
+      .load("/cors-proxy/storage.googleapis.com/notes-analyzer-music-files/" + xhr.responseText)
       .then(
       function() {
       window.osmd = openSheetMusicDisplay; // give access to osmd object in Browser console, e.g. for osmd.setOptions()  
     
       //console.log("e.target.result: " + e.target.result);
       openSheetMusicDisplay.render();
-      deleteXMLFile("https://storage.googleapis.com/notes-analyzer-music-files/" + xhr.responseText);
+      deleteXMLFile("/cors-proxy/storage.googleapis.com/notes-analyzer-music-files/" + xhr.responseText);
       }
       );
     // alert(xhr.responseText);
-    analyzeIcon.classList.remove("fa-spinner", "fa-pulse");
-    analyzeIcon.classList.add("fa-sliders");
+    // analyzeIcon.classList.remove("fa-spinner", "fa-pulse");
+    // analyzeIcon.classList.add("fa-sliders");
     
     //  var x = document.createElement("h6");
     //  x.innerHTML = xhr.responseText;
@@ -128,7 +149,8 @@ const handleSuccess = function(stream) {
     
     var i = Math.floor(Math.random() * 1000000);
     var OBJECT_NAME = i + ".wav";
-    var url = "https://storage.googleapis.com/" + BUCKET_NAME + "/" + OBJECT_NAME;
+    var url = "/cors-proxy/storage.googleapis.com/" + BUCKET_NAME + "/" + OBJECT_NAME;
+    //var url = "https://storage.googleapis.com/" + BUCKET_NAME + "/" + OBJECT_NAME;
 
       var xhr = new XMLHttpRequest();
       xhr.open("PUT", url);     
@@ -147,6 +169,11 @@ const handleSuccess = function(stream) {
    xhr.send(file);
 
 
+
+  }
+
+  function helpPopup() {
+    // open a new window popup with text -- can do this as an alert too if we want
 
   }
       
