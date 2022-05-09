@@ -37,12 +37,12 @@ body {
     border-radius: 50%;
     position: absolute;
     left: 13%;
-    top: -19.5%;
+    top: -17%;
     background: #FFFFFF;
 }
 
 #download-link {
-  /* display: none; */
+  display: none;
   position: absolute;
   left: 80%;
 
@@ -52,8 +52,8 @@ body {
     width: 64.59px;
     height: 64.59px;
     position: absolute;
-    left: 13.55%;
-    top: -6%;
+    left: 13.60%;
+    top: -4.5%;
     border-width: 0px;
     border-radius: 50%;
 }
@@ -103,8 +103,9 @@ body {
 .audio-player {
   position: absolute;
   height: 50px;
-  width: 50%;
+  width: 90%;
   left: 20%;
+  top: 35%;
   font-family: arial;
   font-size: 0.75em;
   overflow: hidden;
@@ -113,12 +114,12 @@ body {
 }
 .audio-player .timeline {
   background: #B3B3B3;
-  width: 100%;
+  width: 50%;
   height: 15px;
   position: absolute;
   cursor: pointer;
   box-shadow: 0 2px 10px 0 #0008;
-  left: 25%;
+  left: 10%;
   border-radius: 7px;
 }
 .audio-player .timeline .progress {
@@ -134,7 +135,7 @@ body {
   align-items: stretch;
   padding: 0 20px;
   position: absolute;
-  left: 5%;
+  left: 2%;
 
 }
 .audio-player .controls > * {

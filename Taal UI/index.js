@@ -59,7 +59,7 @@ const handleSuccess = function(stream) {
     analyzeContainer.style = "display:block";
     button1.removeEventListener('click', stopRecording);
     button1.addEventListener('click', startRecording);
-    
+    downloadLink.style = "display: inline-block";
   }
 
 
@@ -86,6 +86,7 @@ const handleSuccess = function(stream) {
     button1.addEventListener('click', startRecording);
 
     analyzeButton.addEventListener('click', function() {
+      analyzeSuccessDiv.innerHTML = "Loading...";
       uploadFile(file);
       
     })
@@ -105,6 +106,7 @@ const handleSuccess = function(stream) {
     
     xhr.onreadystatechange = function () {
    if (xhr.readyState === 4  && xhr.status === 200) {
+    analyzeSuccessDiv.innerHTML = "";
     var openSheetMusicDisplay = new opensheetmusicdisplay.OpenSheetMusicDisplay("analyze-success", { 
       backend: "svg", 
       drawFromMeasureNumber: 1,
