@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="38" height="10" viewBox="0 0 38 10">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        font-size: 9.918px;
+        font-family: Helvetica;
+        letter-spacing: 0.2em;
+      }
+    </style>
+  </defs>
+  <text id="PRINT" class="cls-1" transform="translate(19 8)"><tspan x="-18.845" y="0">PRINT</tspan></text>
+</svg>

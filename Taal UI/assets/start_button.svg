@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75.57" height="75.57" viewBox="0 0 75.57 75.57">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #29abe2;
+      }
+
+      .cls-2, .cls-3 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        font-size: 7.483px;
+        font-family: Helvetica;
+        letter-spacing: 0.2em;
+      }
+
+      .cls-4 {
+        filter: url(#Ellipse_2);
+      }
+    </style>
+    <filter id="Ellipse_2" x="0" y="0" width="75.57" height="75.57" filterUnits="userSpaceOnUse">
+      <feOffset dx="4.392" dy="4.392" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1.83" result="blur"/>
+      <feFlood flood-opacity="0.149"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Start_Button" data-name="Start Button" transform="translate(-232.601 -212.973)">
+    <g id="Group_43" data-name="Group 43">
+      <g class="cls-4" transform="matrix(1, 0, 0, 1, 232.6, 212.97)">
+        <circle id="Ellipse_2-2" data-name="Ellipse 2" class="cls-1" cx="32.295" cy="32.295" r="32.295" transform="translate(1.1 1.1)"/>
+      </g>
+    </g>
+    <g id="Group_7" data-name="Group 7">
+      <rect id="Rectangle_5" data-name="Rectangle 5" class="cls-2" width="9.372" height="17.009" rx="4.686" transform="translate(261.45 229.998)"/>
+      <rect id="Rectangle_6" data-name="Rectangle 6" class="cls-2" width="5.207" height="2.083" rx="1.041" transform="translate(263.533 250.944)"/>
+      <rect id="Rectangle_7" data-name="Rectangle 7" class="cls-2" width="5.207" height="1.449" transform="translate(265.411 251.465) rotate(-90)"/>
+      <path id="Path_179" data-name="Path 179" class="cls-2" d="M265.791,249.2a6.989,6.989,0,0,1-6.513-7.048v-2.663a.523.523,0,0,1,.523-.523h0a.523.523,0,0,1,.523.523v2.691a5.925,5.925,0,0,0,5.251,5.956,5.818,5.818,0,0,0,6.373-5.785v-2.862a.523.523,0,0,1,.523-.523h0a.523.523,0,0,1,.523.523v2.862A6.864,6.864,0,0,1,265.791,249.2Z"/>
+    </g>
+    <text id="START" class="cls-3" transform="translate(265.387 264.452)"><tspan x="-14.915" y="0">START</tspan></text>
+  </g>
+</svg>

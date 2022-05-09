@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="101.866" height="36.834" viewBox="0 0 101.866 36.834">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        font-size: 9.918px;
+        font-family: Helvetica;
+        letter-spacing: 0.2em;
+      }
+    </style>
+  </defs>
+  <g id="Help_Button" data-name="Help Button" transform="translate(-1185.234 -57.498)">
+    <rect id="Rectangle_4" data-name="Rectangle 4" class="cls-1" width="100.866" height="35.834" rx="17.917" transform="translate(1185.734 57.998)"/>
+    <text id="HELP" class="cls-2" transform="translate(1237.45 79.779)"><tspan x="-15.931" y="0">HELP</tspan></text>
+  </g>
+</svg>

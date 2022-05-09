@@ -1,0 +1,222 @@
+body {
+    background-image: url("../assets/Taal-bkg graphic-01.png");
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size:cover; /* Resize the background image to cover the entire container */
+  background-attachment: fixed;
+   }
+
+   /* img{
+    max-width: 100%;
+    max-height: 100%;
+    display: block; remove extra space below image } */
+.fullcontainer {
+    margin-top: 50px;
+    width: auto;
+}
+
+#recdiv {
+    border-radius: 80px;
+    margin-top: 100px;
+    background: #ffffff;
+    padding: 20px;
+    position: relative;
+    filter: drop-shadow(6px 6px 5px rgba(0, 0, 0, 0.149));
+    height: 63px;
+    /*width: 1190.4859619140625px; */
+
+    /* position: absolute;
+    left: 6.79%;
+    right: 6.06%;
+    top: 28.2%;
+    bottom: 63.6%; */
+    
+  }
+.dot {
+    height: 83.80999755859375px;
+    width: 83.80999755859375px;
+    border-radius: 50%;
+    position: absolute;
+    left: 13%;
+    top: -19.5%;
+    background: #FFFFFF;
+}
+
+#download-link {
+  /* display: none; */
+  position: absolute;
+  left: 80%;
+
+}
+.recbutton {
+    background-image: url("../assets/start_button.svg");
+    width: 64.59px;
+    height: 64.59px;
+    position: absolute;
+    left: 13.55%;
+    top: -6%;
+    border-width: 0px;
+    border-radius: 50%;
+}
+  #analyze-container {
+    position: relative;
+    height:550px;
+    display: none;
+  }
+  #analyze-div {
+    border-radius: 30px;
+    margin-top: 50px;
+    background: #ffffff;
+    opacity: 25%;
+    padding: 20px;
+    height: 100%;
+    width: 100%;
+    /* width: 1232.297119140625px; */
+    position: absolute;
+    z-index: 1;
+  }
+
+  #analyze {
+    height: 35.83399963378906px;
+    width: 100.86599731445312px;
+    /*border-radius: 35%; */
+    /* opacity: 30%; */
+    position: absolute;
+    z-index: 3;
+    left: 40%;
+    top: 15%;
+} 
+
+  #analyze-success {
+    border-radius: 80px;
+    margin-top: 75px;
+    background: #ffffff;
+    padding: 20px;
+    height: 80%;
+    width: 90%;
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    z-index: 2;
+  }
+
+  
+.audio-player {
+  position: absolute;
+  height: 50px;
+  width: 50%;
+  left: 20%;
+  font-family: arial;
+  font-size: 0.75em;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: 6px auto;
+}
+.audio-player .timeline {
+  background: #B3B3B3;
+  width: 100%;
+  height: 15px;
+  position: absolute;
+  cursor: pointer;
+  box-shadow: 0 2px 10px 0 #0008;
+  left: 25%;
+  border-radius: 7px;
+}
+.audio-player .timeline .progress {
+  background: #707070;
+  width: 0%;
+  height: 15px;
+  transition: 0.25s;
+  border-radius: 7px;
+}
+.audio-player .controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  padding: 0 20px;
+  position: absolute;
+  left: 5%;
+
+}
+.audio-player .controls > * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.audio-player .controls .toggle-play.play {
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  height: 0;
+  width: 0;
+  border: 14px solid rgb(255, 255, 255);
+  border-left: 26px solid #B3B3B3;
+}
+.audio-player .controls .toggle-play.play:hover {
+  transform: scale(1.1);
+}
+.audio-player .controls .toggle-play.pause {
+  height: 15px;
+  width: 20px;
+  cursor: pointer;
+  position: relative;
+}
+.audio-player .controls .toggle-play.pause:before {
+  position: absolute;
+  top: 0;
+  left: 0px;
+  background: rgb(0, 0, 0);
+  content: "";
+  height: 15px;
+  width: 3px;
+}
+.audio-player .controls .toggle-play.pause:after {
+  position: absolute;
+  top: 0;
+  right: 8px;
+  background: rgb(0, 0, 0);
+  content: "";
+  height: 15px;
+  width: 3px;
+}
+.audio-player .controls .toggle-play.pause:hover {
+  transform: scale(1.1);
+}
+.audio-player .controls .time {
+  display: flex;
+}
+.audio-player .controls .time > * {
+  padding: 2px;
+}
+.audio-player .controls .volume-container {
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+.audio-player .controls .volume-container .volume-button {
+  height: 26px;
+  display: flex;
+  align-items: center;
+}
+.audio-player .controls .volume-container .volume-button .volume {
+  transform: scale(0.7);
+}
+.audio-player .controls .volume-container .volume-slider {
+  position: absolute;
+  left: -3px;
+  top: 15px;
+  z-index: -1;
+  width: 0;
+  height: 15px;
+  background: white;
+  box-shadow: 0 0 20px #000a;
+  transition: 0.25s;
+}
+.audio-player .controls .volume-container .volume-slider .volume-percentage {
+  background: coral;
+  height: 100%;
+  width: 75%;
+}
+.audio-player .controls .volume-container:hover .volume-slider {
+  left: -123px;
+  width: 120px;
+}
