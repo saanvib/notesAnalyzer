@@ -1,0 +1,7 @@
+tensorflow
+tensorflow_hub
+scipy
+pydub
+google.cloud
+google-cloud-storage
+music21
