@@ -33,9 +33,9 @@ const handleSuccess = function(stream) {
     audio.addEventListener(
       "loadeddata",
       () => {
-        audioPlayer.querySelector(".time .length").textContent = getTimeCodeFromNum(
-          audio.duration
-        );
+        // audioPlayer.querySelector(".time .length").textContent = getTimeCodeFromNum(
+        //   audio.duration
+        // );
         audio.volume = .75;
       },
       false
@@ -86,7 +86,7 @@ const handleSuccess = function(stream) {
     button1.addEventListener('click', startRecording);
 
     analyzeButton.addEventListener('click', function() {
-      analyzeSuccessDiv.innerHTML = "Loading...";
+      analyzeSuccessDiv.innerHTML = "<center><img src='assets/loader.gif'></center>";
       uploadFile(file);
       
     })
@@ -98,6 +98,7 @@ const handleSuccess = function(stream) {
     // 
     // analyzeIcon.classList.remove("fa-sliders");
     // analyzeIcon.classList.add("fa-spinner", "fa-pulse");
+    // var functionUrl = "https://us-central1-notes-analyzer.cloudfunctions.net/analyze_file?filename=" + filename;
     var functionUrl = "/cors-proxy/us-central1-notes-analyzer.cloudfunctions.net/analyze_file?filename=" + filename;
     var xhr = new XMLHttpRequest();
     xhr.open("GET", functionUrl);     
@@ -152,7 +153,7 @@ const handleSuccess = function(stream) {
     var i = Math.floor(Math.random() * 1000000);
     var OBJECT_NAME = i + ".wav";
     var url = "/cors-proxy/storage.googleapis.com/" + BUCKET_NAME + "/" + OBJECT_NAME;
-    //var url = "https://storage.googleapis.com/" + BUCKET_NAME + "/" + OBJECT_NAME;
+    // var url = "https://storage.googleapis.com/" + BUCKET_NAME + "/" + OBJECT_NAME;
 
       var xhr = new XMLHttpRequest();
       xhr.open("PUT", url);     
