@@ -8,7 +8,9 @@ const analyzeSuccessDiv = document.getElementById('analyze-success');
 const buttonText = document.getElementById('button-text');
 const downloadLink = document.getElementById('download-link');
 const analyzeContainer = document.getElementById('analyze-container');
-// const helpButton = document.getElementById('helpbutton');
+const helpButton = document.getElementById('helpbutton');
+const closeX = document.getElementById('closex');
+const closeButton = document.getElementById('closebutton');
 var audio;
 var fileurl;
 var file;
@@ -16,6 +18,19 @@ const handleSuccess = function(stream) {
   const options = {mimeType: 'audio/webm'};
   var recordedChunks = [];
   var mediaRecorder = new MediaRecorder(stream, options);
+
+  helpButton.addEventListener('click', function() {
+    console.log("help button clicked");
+    document.getElementById("helpModal").style.display="block";
+  })
+
+  closeX.addEventListener('click', function() {
+    document.getElementById("helpModal").style.display="none";
+  })
+
+  closeButton.addEventListener('click', function() {
+    document.getElementById("helpModal").style.display="none";
+  })
 
   mediaRecorder.addEventListener('dataavailable', function(e) {
     if (e.data.size > 0) recordedChunks.push(e.data);
@@ -94,12 +109,14 @@ const handleSuccess = function(stream) {
     // mediaRecorder.start();
   };
 
+
+
   function analyzeFile(filename) {
     // 
     // analyzeIcon.classList.remove("fa-sliders");
     // analyzeIcon.classList.add("fa-spinner", "fa-pulse");
-    // var functionUrl = "https://us-central1-notes-analyzer.cloudfunctions.net/analyze_file?filename=" + filename;
     var functionUrl = "/cors-proxy/us-central1-notes-analyzer.cloudfunctions.net/analyze_file?filename=" + filename;
+    // var functionUrl = "https://us-central1-notes-analyzer.cloudfunctions.net/analyze_file?filename=" + filename;
     var xhr = new XMLHttpRequest();
     xhr.open("GET", functionUrl);     
       
@@ -152,8 +169,8 @@ const handleSuccess = function(stream) {
     
     var i = Math.floor(Math.random() * 1000000);
     var OBJECT_NAME = i + ".wav";
-    var url = "/cors-proxy/storage.googleapis.com/" + BUCKET_NAME + "/" + OBJECT_NAME;
     // var url = "https://storage.googleapis.com/" + BUCKET_NAME + "/" + OBJECT_NAME;
+    var url = "/cors-proxy/storage.googleapis.com/" + BUCKET_NAME + "/" + OBJECT_NAME;
 
       var xhr = new XMLHttpRequest();
       xhr.open("PUT", url);     
