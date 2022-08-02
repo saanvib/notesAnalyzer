@@ -1,0 +1,1 @@
+gcloud functions deploy analyze_file --runtime python39 --trigger-http --allow-unauthenticated --memory=4096MB

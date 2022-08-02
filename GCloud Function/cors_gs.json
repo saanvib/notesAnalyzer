@@ -1,0 +1,8 @@
+[
+    {
+      "origin": ["https://www.sightreadingfactory.com/*", "https://www.knowyournotes.app/*"],
+      "method": ["GET", "PUT"],
+      "responseHeader": ["Content-Type"],
+      "maxAgeSeconds": 3600
+    }
+]

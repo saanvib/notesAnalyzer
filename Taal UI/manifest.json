@@ -5,6 +5,17 @@
     "background": {
       "service_worker": "background.js"
     },
+    "web_accessible_resources": [{
+      "resources": ["injected-script.js", "opensheetmusicdisplay.min.js"],
+      "matches": ["https://*.sightreadingfactory.com/*"]
+    }],
+    "content_scripts": [
+      {
+        "matches": ["https://*.sightreadingfactory.com/grade/session/*/a/feedback"],
+        "js": ["content-script.js", "opensheetmusicdisplay.min.js"],
+        "run_at": "document_end"
+      }
+    ],
     "action": {
     },
     "permissions": ["storage", "scripting", "tabs"], 

@@ -11,6 +11,7 @@ const analyzeContainer = document.getElementById('analyze-container');
 const helpButton = document.getElementById('helpbutton');
 const closeX = document.getElementById('closex');
 const closeButton = document.getElementById('closebutton');
+const uploadedFile = document.getElementById('upload');
 var audio;
 var fileurl;
 var file;
@@ -28,6 +29,27 @@ const handleSuccess = function(stream) {
     document.getElementById("helpModal").style.display="none";
   })
 
+  function handleFiles(event) {
+    var files = event.target.files;
+    file = files[0];
+    fileurl = URL.createObjectURL(files[0]);
+    audio = new Audio(
+      fileurl
+    );
+    initialize_audio_player();
+    // document.getElementById("audio").load();
+
+      console.log("download file " + fileurl);
+    //player.src = fileurl;
+    //var a = document.createElement('a');
+    downloadLink.href = fileurl;
+    downloadLink.download = "wavefile.wav";
+    downloadLink.style = "display: inline-block";
+    analyzeContainer.style = "display:block";
+  }
+
+  uploadedFile.addEventListener("change", handleFiles, false);
+
   closeButton.addEventListener('click', function() {
     document.getElementById("helpModal").style.display="none";
   })
@@ -44,24 +66,12 @@ const handleSuccess = function(stream) {
       fileurl
     );
     initialize_audio_player();
-    
-    audio.addEventListener(
-      "loadeddata",
-      () => {
-        // audioPlayer.querySelector(".time .length").textContent = getTimeCodeFromNum(
-        //   audio.duration
-        // );
-        audio.volume = .75;
-      },
-      false
-    );
-
 
     //player.src = fileurl;
     //var a = document.createElement('a');
     downloadLink.href = fileurl;
     downloadLink.download = "wavefile.wav"
-   downloadLink.style = "display: inline";
+    downloadLink.style = "display: inline-block";
   });
 
   function stopRecording() {
@@ -101,7 +111,7 @@ const handleSuccess = function(stream) {
     button1.addEventListener('click', startRecording);
 
     analyzeButton.addEventListener('click', function() {
-      analyzeSuccessDiv.innerHTML = "<center><img src='assets/loader.gif'></center>";
+      analyzeSuccessDiv.innerHTML = "<center><div>Analyzing audio recording...</div><br><img src='assets/loader.gif'></center>";
       uploadFile(file);
       
     })
@@ -115,8 +125,8 @@ const handleSuccess = function(stream) {
     // 
     // analyzeIcon.classList.remove("fa-sliders");
     // analyzeIcon.classList.add("fa-spinner", "fa-pulse");
-    var functionUrl = "/cors-proxy/us-central1-notes-analyzer.cloudfunctions.net/analyze_file?filename=" + filename;
-    // var functionUrl = "https://us-central1-notes-analyzer.cloudfunctions.net/analyze_file?filename=" + filename;
+    // var functionUrl = "/cors-proxy/us-central1-notes-analyzer.cloudfunctions.net/analyze_file?filename=" + filename;
+    var functionUrl = "https://us-central1-notes-analyzer.cloudfunctions.net/analyze_file?filename=" + filename;
     var xhr = new XMLHttpRequest();
     xhr.open("GET", functionUrl);     
       
@@ -133,14 +143,15 @@ const handleSuccess = function(stream) {
       drawPartNames: false
       });
       openSheetMusicDisplay
-      .load("/cors-proxy/storage.googleapis.com/notes-analyzer-music-files/" + xhr.responseText)
+      .load("https://storage.googleapis.com/notes-analyzer-music-files/" + xhr.responseText)
       .then(
       function() {
       window.osmd = openSheetMusicDisplay; // give access to osmd object in Browser console, e.g. for osmd.setOptions()  
     
       //console.log("e.target.result: " + e.target.result);
       openSheetMusicDisplay.render();
-      deleteXMLFile("/cors-proxy/storage.googleapis.com/notes-analyzer-music-files/" + xhr.responseText);
+      // deleteXMLFile("/cors-proxy/storage.googleapis.com/notes-analyzer-music-files/" + xhr.responseText);
+      deleteXMLFile("https://storage.googleapis.com/notes-analyzer-music-files/" + xhr.responseText);
       }
       );
     // alert(xhr.responseText);
@@ -169,8 +180,8 @@ const handleSuccess = function(stream) {
     
     var i = Math.floor(Math.random() * 1000000);
     var OBJECT_NAME = i + ".wav";
-    // var url = "https://storage.googleapis.com/" + BUCKET_NAME + "/" + OBJECT_NAME;
-    var url = "/cors-proxy/storage.googleapis.com/" + BUCKET_NAME + "/" + OBJECT_NAME;
+    var url = "https://storage.googleapis.com/" + BUCKET_NAME + "/" + OBJECT_NAME;
+    // var url = "/cors-proxy/storage.googleapis.com/" + BUCKET_NAME + "/" + OBJECT_NAME;
 
       var xhr = new XMLHttpRequest();
       xhr.open("PUT", url);     

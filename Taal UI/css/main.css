@@ -14,21 +14,62 @@ body {
     width: auto;
 }
 
+#audio-container {
+  position: relative;
+    height:200px;
+    pointer-events: none;
+    margin-top: 150px;
+}
+
+#audio-block {
+  border-radius: 30px;
+  margin-top: 50px;
+  background: #ffffff;
+  opacity: 25%;
+  padding: 20px;
+  height: 100%;
+  width: 100%;
+  /* width: 1232.297119140625px; */
+  position: absolute;
+  pointer-events: none;
+}
+
+#upload-block {
+  border-radius: 80px;
+    margin-top: 60px;
+    background: #ffffff;
+    padding: 20px;
+    height: 30%;
+    width: 87%;
+    position: absolute;
+    top: 5%;
+    left: 7%;
+    pointer-events: none;
+}
+
+#uploaddiv {
+  position: absolute;
+  left: 12%;
+  top: 19%;
+}
+
 #recdiv {
     border-radius: 80px;
     margin-top: 100px;
     background: #ffffff;
     padding: 20px;
-    position: relative;
+    /* position: relative; */
     filter: drop-shadow(6px 6px 5px rgba(0, 0, 0, 0.149));
     height: 63px;
+    
     /*width: 1190.4859619140625px; */
 
-    /* position: absolute;
+    position: absolute;
     left: 6.79%;
     right: 6.06%;
     top: 28.2%;
-    bottom: 63.6%; */
+    bottom: 63.6%;
+    pointer-events: none;
     
   }
 .dot {
@@ -39,12 +80,14 @@ body {
     left: 13%;
     top: -17%;
     background: #FFFFFF;
+    pointer-events: none;
 }
 
 #download-link {
-  display: none;
+  /* display: none; */
   position: absolute;
   left: 80%;
+  pointer-events: auto;
 
 }
 .recbutton {
@@ -56,6 +99,7 @@ body {
     top: -4.5%;
     border-width: 0px;
     border-radius: 50%;
+    pointer-events: auto;
 }
   #analyze-container {
     position: relative;
@@ -74,6 +118,7 @@ body {
     position: absolute;
     z-index: 1;
   }
+
 
   #analyze {
     height: 35.83399963378906px;

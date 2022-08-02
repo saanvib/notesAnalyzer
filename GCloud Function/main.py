@@ -235,4 +235,10 @@ def analyze_file(request):
     blob.delete()
     
     print(str(xml))
-    return xml_filename
+    headers = {
+        'Access-Control-Allow-Origin': '*'
+    }
+
+    return (xml_filename, 200, headers)
+
+    # return xml_filename
