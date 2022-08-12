@@ -1,7 +1,13 @@
 {
-    "name": "Sight Reading Helper",
+    "name": "Taal",
     "version": "1.0",
     "manifest_version": 3,
+    "icons": {"16": "assets/taalLogo16.png",
+    "32": "assets/taalLogo32.png",
+    "48": "assets/taalLogo48.png",
+    "64": "assets/taalLogo64.png",
+    "128": "assets/taalLogo128.png"},
+    "description": "Hi",
     "background": {
       "service_worker": "background.js"
     },
