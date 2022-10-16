@@ -1,13 +1,13 @@
 {
-    "name": "Taal",
-    "version": "1.0",
+    "name": "Taal - Know Your Notes",
+    "version": "1.1",
     "manifest_version": 3,
     "icons": {"16": "assets/taalLogo16.png",
     "32": "assets/taalLogo32.png",
     "48": "assets/taalLogo48.png",
     "64": "assets/taalLogo64.png",
     "128": "assets/taalLogo128.png"},
-    "description": "Hi",
+    "description": "Taal makes learning to sing easier, by converting audio to sheet music. Use with Sight Reading Factory to make assignments simpler.",
     "background": {
       "service_worker": "background.js"
     },
@@ -24,8 +24,7 @@
     ],
     "action": {
     },
-    "permissions": ["storage", "scripting", "tabs"], 
-    "host_permissions":["https://storage.googleapis.com/*", "https://us-central1-notes-analyzer.cloudfunctions.net/analyze_file*", "https://downloads2.makemusic.com/musicxml/*", "https://kit.fontawesome.com/*"],
+    "permissions": ["scripting"], 
     "content_security_policy": {
         "extension_pages": "script-src 'self'; object-src 'self'"
     }

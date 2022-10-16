@@ -1,3 +1,4 @@
+from contextlib import nullcontext
 import math
 import statistics
 import tensorflow as tf
@@ -106,10 +107,35 @@ def get_quantization_and_error(pitch_outputs_and_rests, predictions_per_eighth, 
 def analyze_file(request):
     request_json = request.get_json(silent=True)
     request_args = request.args
+    ts1 = "0"
+    ts2 = "0"
+    sharps = "0"
+    flats = "0"
     if request_json and 'filename' in request_json:
         filename = request_json['filename']
     elif request_args and 'filename' in request_args:
         filename = request_args['filename']
+        
+    if request_json and 'ts1' in request_json:
+        ts1 = request_json['ts1']
+    elif request_args and 'ts1' in request_args:
+        ts1 = request_args['ts1']
+        
+    if request_json and 'ts2' in request_json:
+        ts2 = request_json['ts2']
+    elif request_args and 'ts2' in request_args:
+        ts2 = request_args['ts2']
+        
+    if request_json and 'sharps' in request_json:
+        sharps = request_json['sharps']
+    elif request_args and 'sharps' in request_args:
+        sharps = request_args['sharps']
+        
+    if request_json and 'flats' in request_json:
+        flats = request_json['flats']
+    elif request_args and 'flats' in request_args:
+        flats = request_args['flats']
+        
     print("filename is " + filename)
     download_blob("notes-analyzer-music-files", filename, "/tmp/" + filename)
     converted_audio_file = convert_audio_for_model("/tmp/" + filename)
@@ -180,6 +206,7 @@ def analyze_file(request):
     while best_notes_and_rests[-1] == 'Rest':
         best_notes_and_rests = best_notes_and_rests[:-1]
     
+    
     # Creating the sheet music score.
     sc = music21.stream.Score()
     # Adjust the speed to match the actual singing.
@@ -187,6 +214,24 @@ def analyze_file(request):
     print ('bpm: ', bpm)
     a = music21.tempo.MetronomeMark(number=bpm)
     sc.insert(0,a)
+    if (ts1!="0" and ts2!="0"):
+        ts = music21.meter.TimeSignature(ts1+"/"+ts2)
+        sc.insert(0, ts)
+    if (sharps and flats):
+        nums = int(sharps)
+        numf = int(flats)
+        if (nums == 0 and numf == 0):
+            keysig = music21.key.KeySignature(0)
+            sc.insert(0, keysig)
+        elif (numf == 0):
+            keysig = music21.key.KeySignature(nums)
+            sc.insert(0, keysig)
+        elif (nums == 0):
+            keysig = music21.key.KeySignature(-1*numf)
+            sc.insert(0, keysig)
+        
+    
+    # sc.insert(0, ks2)
     # combine quarter notes to half
     notes_arr = []
     notetype_arr = []
