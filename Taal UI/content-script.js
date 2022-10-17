@@ -15,9 +15,9 @@ function analyzeFile(filename) {
   tsArray = document.getElementsByClassName("abcjs-time-signature");
   tsChildren = tsArray[0].children;
   ts1 = tsChildren[0].getAttribute("data-name");
-  console.log("ts1 " + ts1);
+  // console.log("ts1 " + ts1);
   ts2 = tsChildren[1].getAttribute("data-name");
-  console.log("ts2 " + ts2);
+  // console.log("ts2 " + ts2);
   ksArray = document.getElementsByClassName("abcjs-key-signature");
   sharps = 0;
   flats = 0;
@@ -31,8 +31,8 @@ function analyzeFile(filename) {
       flats = ksChildren.length;
     }
   }
-  console.log("s " + sharps);
-  console.log("f " + flats);
+  // console.log("s " + sharps);
+  // console.log("f " + flats);
   var functionUrl =
     "https://us-central1-notes-analyzer.cloudfunctions.net/analyze_file?filename=" +
     filename +
