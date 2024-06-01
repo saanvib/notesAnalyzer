@@ -9,6 +9,10 @@ from google.cloud import storage
 import music21
 import json, random
 
+# TODO: when you record, play the recording, and then record something new, the play button doesnt work
+
+CONFIDENCE_THRESHOLD = 0.6
+
 def convert_audio_for_model(user_file, output_file='/tmp/converted_audio_file.wav'):
   audio = AudioSegment.from_file(user_file)
   EXPECTED_SAMPLE_RATE = 16000
@@ -72,7 +76,7 @@ def quantize_predictions(group, ideal_offset):
     zero_values_count = len(group) - len(non_zero_values)
 
     # Create a rest if 80% is silent, otherwise create a note.
-    if zero_values_count > 0.8 * len(group):
+    if zero_values_count > CONFIDENCE_THRESHOLD * len(group):
         # Interpret as a rest. Count each dropped note as an error, weighted a bit
         # worse than a badly sung note (which would 'cost' 0.5).
         return 0.51 * len(non_zero_values), "Rest"
@@ -159,7 +163,7 @@ def analyze_file(request):
     pitch_outputs = [ float(x) for x in pitch_outputs]
 
     indices = range(len (pitch_outputs))
-    confident_pitch_outputs = [ (i,p) for i, p, c in zip(indices, pitch_outputs, confidence_outputs) if  c >= 0.9  ]
+    confident_pitch_outputs = [ (i,p) for i, p, c in zip(indices, pitch_outputs, confidence_outputs) if  c >= CONFIDENCE_THRESHOLD  ]
     confident_pitch_outputs_x, confident_pitch_outputs_y = zip(*confident_pitch_outputs)
 
     confident_pitch_values_hz = [ output2hz(p) for p in confident_pitch_outputs_y ] 
@@ -169,7 +173,7 @@ def analyze_file(request):
     
     
     # adding zeros when no singing
-    pitch_outputs_and_rests = [output2hz(p) if c >= 0.9 else 0 for i, p, c in zip(indices, pitch_outputs, confidence_outputs)]
+    pitch_outputs_and_rests = [output2hz(p) if c >= CONFIDENCE_THRESHOLD else 0 for i, p, c in zip(indices, pitch_outputs, confidence_outputs)]
     
     # note offsets
     A4 = 440
@@ -233,14 +237,11 @@ def analyze_file(request):
     
     # sc.insert(0, ks2)
     # combine quarter notes to half
-    notes_arr = []
+    notes_arr = [] 
     notetype_arr = []
+    # notes_arr = best_notes_and_rests # COMMENT THIS
     i = 0
     while i < len(best_notes_and_rests)-1:
-        if i%4 == 3:
-            # last note in measure
-            i+=1
-            continue
         snote = best_notes_and_rests[i]
         nextnote = best_notes_and_rests[i+1]
         if snote == nextnote:
@@ -251,9 +252,14 @@ def analyze_file(request):
             notes_arr.append(snote)
             notetype_arr.append('quarter')
             i+=1
-    print(best_notes_and_rests)
-    print(notes_arr)
-    print(notetype_arr)        
+    if i == len(best_notes_and_rests)-1:
+        snote = best_notes_and_rests[i]
+        notes_arr.append(snote)
+        notetype_arr.append('quarter')
+            
+    # print(best_notes_and_rests)
+    # print(notes_arr)
+    # print(notetype_arr)        
         
     for i in range(len(notes_arr)):   
         d = notetype_arr[i]
@@ -261,6 +267,9 @@ def analyze_file(request):
             sc.append(music21.note.Rest(type=d))
         else:
             sc.append(music21.note.Note(notes_arr[i], type=d))
+
+
+
 
     
     xml = open(sc.write('musicxml')).read()
