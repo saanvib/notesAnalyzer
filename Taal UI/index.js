@@ -12,6 +12,8 @@ const helpButton = document.getElementById("helpbutton");
 const closeX = document.getElementById("closex");
 const closeButton = document.getElementById("closebutton");
 const uploadedFile = document.getElementById("upload");
+const keySigChooser = document.getElementById("keysig_choose");
+
 var audio;
 var fileurl;
 var file;
@@ -187,12 +189,17 @@ function uploadFile(file) {
   var url = "https://storage.googleapis.com/" + BUCKET_NAME + "/" + OBJECT_NAME;
   // var url = "/cors-proxy/storage.googleapis.com/" + BUCKET_NAME + "/" + OBJECT_NAME;
 
+  var params1 = {
+   "sharps": 5
+   };
+   var params = JSON.stringify(params1);
+
   var xhr = new XMLHttpRequest();
   xhr.open("PUT", url);
 
   xhr.setRequestHeader("Accept", "application/json");
   xhr.setRequestHeader("Content-Type", "audio/webm");
-
+  
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
       analyzeFile(OBJECT_NAME);
@@ -203,6 +210,8 @@ function uploadFile(file) {
   var formData = new FormData();
   formData.append("thefile", file);
   xhr.send(file);
+//   xhr.send(params);
+
 }
 
 function helpPopup() {

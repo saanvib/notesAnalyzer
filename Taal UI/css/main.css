@@ -90,6 +90,11 @@ body {
   pointer-events: auto;
 
 }
+
+#keysig_choose {
+   pointer-events: auto;
+}
+
 .recbutton {
     background-image: url("../assets/start_button.svg");
     width: 64.59px;
