@@ -210,7 +210,7 @@ function uploadFile(file) {
   var formData = new FormData();
   formData.append("thefile", file);
   xhr.send(file);
-//   xhr.send(params);
+  xhr.send(params);
 
 }
 
