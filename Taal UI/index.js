@@ -189,10 +189,10 @@ function uploadFile(file) {
   var url = "https://storage.googleapis.com/" + BUCKET_NAME + "/" + OBJECT_NAME;
   // var url = "/cors-proxy/storage.googleapis.com/" + BUCKET_NAME + "/" + OBJECT_NAME;
 
-  var params1 = {
-   "sharps": 5
-   };
-   var params = JSON.stringify(params1);
+//   var params1 = {
+//    "sharps": 5
+//    };
+//    var params = JSON.stringify(params1);
 
   var xhr = new XMLHttpRequest();
   xhr.open("PUT", url);
@@ -210,7 +210,7 @@ function uploadFile(file) {
   var formData = new FormData();
   formData.append("thefile", file);
   xhr.send(file);
-  xhr.send(params);
+//   xhr.send(params);
 
 }
 
